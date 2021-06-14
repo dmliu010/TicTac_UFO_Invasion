@@ -1,6 +1,6 @@
 window.document.title = `"TicTac" UFO Invasion`
 
-document.addEventListener('keydown', function(e){
+document.addEventListener("keydown", function(e){
   if(e.keyCode == 82)
     window.location.reload();
 })
@@ -31,8 +31,8 @@ add([
 
 const player = 
   add([
-    sprite('player',
-      {animSpeed: 0.1,
+    sprite("player",
+      {animSpeed: 0.8,
       frame: 3}
     ),
     scale(1),
@@ -43,7 +43,13 @@ const player =
     })
   ])
 
+const defaultFace = () => {
+  player.frame = 0
+}
 
+keyRelease("up", defaultFace)
+keyRelease("right", defaultFace)
+keyRelease("left", defaultFace)
 
 
 
@@ -54,12 +60,12 @@ keyDown("up", () => {
 const MOVE_SPEED = 50
 
 
-keyDown('right', () => {
+keyDown("right", () => {
   player.frame = 1;
   player.move(MOVE_SPEED)
 })
 
-keyDown('left', () => {
+keyDown("left", () => {
   player.frame = 4;
   player.move(-MOVE_SPEED)
 })
@@ -95,7 +101,7 @@ addLevel(
 ], {
   width: 40,
   height: 20,
-  'x':[sprite('floor'), solid(), 'dangerous'],
+  "x":[sprite("floor"), solid(), "dangerous"],
 //  '@':[sprite('ufo'), body(), 'dangerous']
 })
 
@@ -106,7 +112,7 @@ add([
   solid(),
 ]);
 
-player.collides('dangerous', () => {
+player.collides("dangerous", () => {
   camShake(10)
   player.frame = 0;
   destroy(player)
@@ -138,11 +144,11 @@ loop(1.5, ()=> {
   const randSize = rand(1,2.5)
   const randPos =  rand(0, height() - 120)
   add([
-    sprite('ufo'),
-    origin('bot'),
+    sprite("ufo"),
+    origin("bot"),
     pos(width(), randPos),
     scale(randSize),
-    'ufo',
+    "ufo",
     "dangerous"
   ])
   
