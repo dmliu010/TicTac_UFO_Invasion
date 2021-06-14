@@ -31,7 +31,10 @@ add([
 
 const player = 
   add([
-    sprite('player'),
+    sprite('player',
+      {animSpeed: 0.1,
+      frame: 3}
+    ),
     scale(1),
     pos(20,20),
     body({
@@ -45,16 +48,19 @@ const player =
 
 
 keyDown("up", () => {
+  player.frame = 2;
   player.jump();
 });
 const MOVE_SPEED = 50
 
 
 keyDown('right', () => {
+  player.frame = 1;
   player.move(MOVE_SPEED)
 })
 
 keyDown('left', () => {
+  player.frame = 4;
   player.move(-MOVE_SPEED)
 })
 
@@ -102,6 +108,7 @@ add([
 
 player.collides('dangerous', () => {
   camShake(10)
+  player.frame = 0;
   destroy(player)
   add([
     text(`"LOSER! You're a LOSER! Are you feeling sorry for yourself?! 
